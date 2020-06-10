@@ -8,7 +8,6 @@ from oyster.equivalence import dag_to_cpdag, equivalence_class_size
 import oyster.example.graphs as ex
 from itertools import chain
 import matplotlib.pyplot as plt
-from IPython.display import Image
 
 def print_path(path, start):
     """Pretty-prints a path from an nx.DiGraph"""
@@ -70,8 +69,7 @@ def gv_draw(G, pos=None, filename='oyster/viz/images/graph.png',
             node_color='black', hidden_node_color='black',
             edge_color='black', hidden_edge_color='black',
             edge_style='solid', hidden_edge_style='dashed'):
-    """Draw using Graphviz (requires pygraphviz).
-    Usage: Image(gv_draw(G, pos))"""
+    """Draw using Graphviz to write an image (requires pygraphviz)."""
     import pygraphviz as pgv
     A = nx.nx_agraph.to_agraph(G)
     
