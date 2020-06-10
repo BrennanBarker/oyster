@@ -27,13 +27,14 @@ def print_paths(DAG, start, finish, directed=False):
     for path in paths(DAG, start, finish, directed=directed): 
         print_path(path, start='X') 
 
-def draw(G, pos=None, title=None, ax=None):
+def draw(G, pos=None, title=None, ax=None, 
+         _show_axis_lines=False):
     """A simple wrapper for drawing graphs."""
     if not ax: 
         fig, ax = plt.subplots()    
     ax.set_title(title)
-    ax.axis('off')
-    ax.set_aspect('equal', 'box')
+    ax.axis(_show_axis_lines)
+    #ax.set_aspect('equal', 'box')
     if not pos: # If pos not specified...
         pos = ex.pos.get(G, None) # Try to find a matching example
     if title:
@@ -47,11 +48,14 @@ def d_sep_graphs(DAG, X, Y, Z, pos=None):
     a = ancestral_graph(DAG, X|Y|Z) 
     m = moral_graph(a)
     mwoz = m.subgraph(m.nodes - Z) 
+    
+    if not pos: # If pos not specified...
+        pos = ex.pos.get(DAG, None) # Try to find a matching example
 
     f, axs = plt.subplots(1,3, constrained_layout=True)
-    draw(a, title='ancestral', pos=pos, ax=axs[0])
-    draw(m, title='moral', pos=pos, ax=axs[1])
-    draw(mwoz, title='W/out Givens', pos=pos, ax=axs[2])
+    draw(a, title='Ancestral', pos=pos, ax=axs[0], _show_axis_lines=True)
+    draw(m, title='Moral', pos=pos, ax=axs[1], _show_axis_lines=True)
+    draw(mwoz, title='Without Givens', pos=pos, ax=axs[2], _show_axis_lines=True)
         
 def draw_cpdag(DAG, pos):
     plt.subplot(1,2,1); plt.title('DAG')
