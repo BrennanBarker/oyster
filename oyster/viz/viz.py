@@ -2,7 +2,7 @@
 
 import networkx as nx
 from oyster.structures import paths
-from oyster.utils.graph_utils import ancestral_graph, moral_graph
+from oyster.utils.graph_utils import ancestral_graph, moral_graph, reversible_edges
 from oyster.utils.set_utils import _set
 from oyster.equivalence import dag_to_cpdag, equivalence_class_size
 import oyster.example.graphs as ex
@@ -33,9 +33,9 @@ def draw(G, pos=None, title=None, ax=None,
         fig, ax = plt.subplots()    
     ax.set_title(title)
     ax.axis(_show_axis_lines)
-    #ax.set_aspect('equal', 'box')
-    if not pos: # If pos not specified...
-        pos = ex.pos.get(G, None) # Try to find a matching example
+
+    if not pos: pos = ex.pos.get(G, None) # Try to find a matching pos
+        
     if title:
         plt.title=title
     nx.draw_networkx(G, pos, with_labels=True, 
@@ -48,20 +48,23 @@ def d_sep_graphs(DAG, X, Y, Z, pos=None):
     m = moral_graph(a)
     mwoz = m.subgraph(m.nodes - Z) 
     
-    if not pos: # If pos not specified...
-        pos = ex.pos.get(DAG, None) # Try to find a matching example
+    if not pos: pos = ex.pos.get(DAG, None) # Try to find a matching pos
 
     f, axs = plt.subplots(1,3, constrained_layout=True)
     draw(a, title='Ancestral', pos=pos, ax=axs[0], _show_axis_lines=True)
     draw(m, title='Moral', pos=pos, ax=axs[1], _show_axis_lines=True)
     draw(mwoz, title='Without Givens', pos=pos, ax=axs[2], _show_axis_lines=True)
         
-def draw_cpdag(DAG, pos):
-    plt.subplot(1,2,1); plt.title('DAG')
-    oy.draw(DAG, pos=pos)
-    plt.subplot(1,2,2); plt.title('CPDAG')
-    oy.draw(dag_to_cpdag(DAG), pos=pos)
-    print(f'equivalent dags: {equivalence_class_size(DAG)}')
+def draw_cpdag(DAG, pos=None):
+    
+    cpdag = dag_to_cpdag(DAG)
+    
+    if not pos: pos=ex.pos.get(DAG, None) # Try to find a matching pos
+        
+    f, axs = plt.subplots(1,2, constrained_layout=True)
+    draw(DAG, title='DAG', pos=pos, ax=axs[0])
+    draw(cpdag, title='CPDAG', pos=pos, ax=axs[1])
+    print(f'equivalent dags: {2 ** (len(reversible_edges(cpdag)) // 2)}')
 
 def gv_draw(G, pos=None, filename='oyster/viz/images/graph.png', 
             font_color='black', 
