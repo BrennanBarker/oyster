@@ -1,4 +1,5 @@
 from oyster.oyster import *
+from oyster.adjust import *
 from oyster.diagram import CausalDiagram
 from oyster.structures import *
 from oyster.utils.graph_utils import *
