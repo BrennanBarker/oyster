@@ -18,7 +18,8 @@ def backdoor_adjustment_formula(DAG, X, Y, Z):
 
     assert meets_backdoor_criterion(DAG, X, Y, Z), 'Z does not meet backdoor criterion'
     
-    x,y,z = map(val, (X, Y, Z))    
+    x,y,z = map(val, (X, Y, Z))  
+    if len(z) > 0: z = '{'+str(z)+'}'
     bd_formula = f'\sum_{z}{P(y, given=(x, z))}{P(z)}'
     
     return P(y, do=x) + '=' + bd_formula
