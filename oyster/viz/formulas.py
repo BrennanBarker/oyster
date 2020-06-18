@@ -32,10 +32,23 @@ def frontdoor_adjustment_formula(DAG, X, Y, Z):
     
     x,y,z = map(val, (X, Y, Z))
     xp = x+"'"
+    subxp = '{'+xp+'}'
     
-    fd_formula = f"\sum_{z}{P(z, given=x)}\sum_{{xp}}{P(y, given=(xp, z))}{P(xp)}"
+    fd_formula = f"\sum_{z}{P(z, given=x)}\sum_{subxp}{P(y, given=(xp, z))}{P(xp)}"
 
     return P(y, do=x) + '=' + fd_formula
+
+def specific_adjustment_formula(DAG, X, Y, Z, S):
+    """An expression for the z-specific causal effect of X on Y.
+    Z U S must satisfy the front-door criterion."""
+
+    assert meets_backdoor_criterion(DAG, X, Y, _set(Z) | _set(S)), 'Z does not meet backdoor criterion'
+    
+    x,y,z,s = map(val, (X, Y, Z, S))  
+    if len(s) > 0: sub_s = '{'+str(s)+'}'
+    specific_formula = f'\sum_{sub_s}{P(y, given=(x, s, z))}{P(s, given=z)}'
+    
+    return P(y, given=z, do=x) + '=' + specific_formula
     
 # Representations
 def val(Variables):
@@ -46,7 +59,7 @@ def tjoin(vals):
     return ','.join(sorted(vals)) if type(vals) == tuple else vals
 
 def _sub(do):
-    return f'_{do}' if do else ''
+    return '_{'+do+'}' if do else ''
 
 def P(event, given=[], do=[]):
     """Represent the (maybe conditional) probability of an event(s)."""
