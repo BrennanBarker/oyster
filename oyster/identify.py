@@ -9,7 +9,7 @@ from oyster.structures import paths, c_components, has_confounded_path
 
 def is_identifiable_single_x(G, X, Y):
     """Return if the causal effect of singletons X and Y in G
-    is identifiable based on the algorithm in Tian and Pearl 2002."""
+    is identifiable based on the criterion in Tian and Pearl 2002."""
     return not any(
         [has_confounded_path(ancestral_graph(G, Y), X, ChX) 
          for ChX in Ch(G, X)])
@@ -43,4 +43,4 @@ def is_identifiable(G, X, Y, print_hedge=False):
             return True
         else: # Line 7
             Sprime = [c for c in C(G) if S < c][0]
-            return is_identifiable(G.subgraph(Sprime | Y), X & Sprime, Y) # Should subgraph really include Y?
+            return is_identifiable(G.subgraph(Sprime | Y), X & Sprime, Y) 
