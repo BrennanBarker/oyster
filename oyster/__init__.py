@@ -2,6 +2,7 @@ from oyster.oyster import *
 from oyster.adjust import *
 from oyster.diagram import CausalDiagram
 from oyster.structures import *
+from oyster.instruments import *
 from oyster.utils.graph_utils import *
 from oyster.utils.set_utils import *
 import oyster.example.graphs as ex
