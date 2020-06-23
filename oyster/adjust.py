@@ -4,6 +4,7 @@ import networkx as nx
 from oyster.utils.set_utils import powerset, minimal_sets, _set 
 from oyster.utils.graph_utils import An, De, Pa, Ch, ancestral_graph, moral_graph, backdoor_graph
 
+# TODO: powerset search is probably prohibitive for moderately-sized graphs, might need to sized bsed on some number
 
 ### D-separation ###
 def d_separated(DAG, X, Y, Z):

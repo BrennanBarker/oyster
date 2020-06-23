@@ -24,12 +24,12 @@ def print_path(path, start):
 
 def print_paths(DAG, start, finish, directed=False):
     for path in paths(DAG, start, finish, directed=directed): 
-        print_path(path, start='X') 
+        print_path(path, start=start) 
 
 def draw(G, pos=None, title=None, ax=None, 
          _show_axis_lines=False):
     """A simple wrapper for drawing graphs."""
-    if not ax: 
+    if ax is None: 
         fig, ax = plt.subplots()    
     ax.set_title(title)
     ax.axis(_show_axis_lines)
@@ -40,6 +40,7 @@ def draw(G, pos=None, title=None, ax=None,
         plt.title=title
     nx.draw_networkx(G, pos, with_labels=True, 
             node_color='lightgray', font_color='black', ax=ax)
+
 
 def d_sep_graphs(DAG, X, Y, Z, pos=None):
     """Visualize d-separation."""
