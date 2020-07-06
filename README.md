@@ -13,15 +13,15 @@ an overview of causal inference and an explanation of Oyster's features.
 
 2) (Optional) Create a virtual environment.
 
-This will help keep Oyster and its dependencies separate from your other 
-packages. I recommend [pyenv+virtualenv](https://github.com/pyenv/pyenv) but 
-any environment manager (conda, etc.) will work.
+    This will help keep Oyster and its dependencies separate from your other 
+    packages. I recommend [pyenv+virtualenv](https://github.com/pyenv/pyenv) 
+    but any environment manager (conda, etc.) will work.
 
 3) Install the package manually using `pip`.  
 
-***DO NOT FORGET THE "-e"!*** This project is not currently listed on the 
-[Python Package Index (PyPi)](https://pypi.org). There is another `oyster` 
-package on PyPi that will install instead if you forget the '-e'.
+    ***DO NOT FORGET THE "-e"!*** This project is not currently listed on the 
+    [Python Package Index (PyPi)](https://pypi.org). There is another `oyster` 
+    package on PyPi that will install instead if you forget the '-e'.
 
     ```pip install -e oyster```
 
@@ -29,8 +29,8 @@ package on PyPi that will install instead if you forget the '-e'.
 4) (Optional) Install Jupyter Lab or Jupyter Notebook to view the walkthrough 
 interactively.
 
-Oyster doesn't need these packages to run on its own so for the sake of 
-cleanliness they're not included as requirements.
+    Oyster doesn't need these packages to run on its own so for the sake of 
+    cleanliness they're not included as requirements.
 
     ```pip install jupyterlab```
   
