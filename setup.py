@@ -13,7 +13,7 @@ setuptools.setup(
     url="https://github.com/BrennanBarker/oyster",
     packages=setuptools.find_packages(),
     install_requires=[
-        'matplotlib'
+        'matplotlib',
         'networkx'
     ],
     classifiers=[
