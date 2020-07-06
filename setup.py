@@ -15,7 +15,7 @@ setuptools.setup(
     install_requires=[
         'matplotlib'
         'networkx'
-    ]
+    ],
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
