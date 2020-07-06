@@ -17,7 +17,7 @@ an overview of causal inference and an explanation of Oyster's features.
     packages. I recommend [pyenv+virtualenv](https://github.com/pyenv/pyenv) 
     but any environment manager (conda, etc.) will work.
 
-3) Install the package manually using `pip`.  
+3) Install the Oyster package manually using `pip`.  
 
     ***DO NOT FORGET THE "-e"!*** This project is not currently listed on the 
     [Python Package Index (PyPi)](https://pypi.org). There is another `oyster` 
